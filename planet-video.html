@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Planet Kamu</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: sans-serif;
+      padding-top: 50px;
+      background: black;
+      color: white;
+      min-height: 100vh;
+    }
+    #planet {
+      border-radius: 50%;
+      margin: 30px 0;
+      box-shadow: 0 0 20px white;
+    }
+    video {
+      max-width: 90vw;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #fff;
+    }
+  </style>
+</head>
+<body>
+  <h1>Selamat Datang di Planet <span id="planetName">?</span></h1>
+  <div id="planet"></div>
+  <p>Ukuran: <span id="ukuran"></span></p>
+  <p>Warna: <span id="warna"></span></p>
+
+  <video controls autoplay loop muted>
+    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+    Browser kamu tidak mendukung video.
+  </video>
+
+  <script>
+    // Ambil parameter dari URL
+    const params = new URLSearchParams(window.location.search);
+    const nama = params.get("nama") || "Planet Tidak Dikenal";
+    const ukuran = params.get("ukuran") || "sedang";
+    const warna = params.get("warna") || "00aaff";
+
+    // Ubah ukuran ke pixel
+    const sizeMap = { kecil: 100, sedang: 180, besar: 260 };
+    const size = sizeMap[ukuran] || 180;
+
+    // Update tampilan
+    document.getElementById("planetName").textContent = decodeURIComponent(nama);
+    document.getElementById("ukuran").textContent = ukuran;
+    document.getElementById("warna").textContent = `#${warna}`;
+
+    const planetDiv = document.getElementById("planet");
+    planetDiv.style.backgroundColor = `#${warna}`;
+    planetDiv.style.width = `${size}px`;
+    planetDiv.style.height = `${size}px`;
+  </script>
+</body>
+</html>
